@@ -2,19 +2,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="db_style.css">
     <title>Add Animal</title>
 </head>
 <body>
     <form method="post" action="add_animal.php">
         <h1>Add New Animal</h1>
-        Name: <input type="text" name="name" required><br>
-        Species: <input type="text" name="species" required><br>
-        Breed: <input type="text" name="breed" required><br>
-        Age: <input type="number" name="age" required><br>
-        Vaccination Record: <textarea name="vaccination_record"></textarea><br>
-        Employee ID: <input type="number" name="emp_id"><br>
-        Volunteer ID: <input type="number" name="volunteer_id"><br>
+        <label>Name</label> <input type="text" name="name" required><br>
+        <label>Species</label> <input type="text" name="species" required><br>
+        <label>Breed</label> <input type="text" name="breed" required><br>
+        <label>Age</label> <input type="number" name="age" required><br>
+        <label>Vaccination Record</label> <textarea name="vaccination_record"></textarea><br>
+        <label>Employee ID</label> <input type="number" name="emp_id"><br>
+        <label>Volunteer ID</label> <input type="number" name="volunteer_id"><br>
         <button type="submit">Add Animal</button>
     </form>
 

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="db_style.css">
     <title>Search Database</title>
 </head>
 <body>
@@ -21,28 +21,40 @@
     </form>
 
     <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $table = $_POST['table'];
-        $field = $_POST['field'];
-        $value = $_POST['value'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $table = $_POST['table'];
+    $field = $_POST['field'];
+    $value = $_POST['value'];
 
-        $sql = "SELECT * FROM $table WHERE $field LIKE '%$value%'";
-        $result = $conn->query($sql);
+    $sql = "SELECT * FROM $table WHERE $field LIKE '%$value%'";
+    $result = $conn->query($sql);
 
-        if ($result->num_rows > 0) {
-            echo "<table border='1'>";
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                foreach ($row as $key => $val) {
-                    echo "<td>$val</td>";
-                }
-                echo "</tr>";
-            }
-            echo "</table>";
-        } else {
-            echo "No results found.";
+    if ($result->num_rows > 0) {
+        echo "<table>";
+        echo "<caption>Results from $table Table</caption>";
+
+        // Fetch and display table headers
+        echo "<tr>";
+        $columns = array_keys($result->fetch_assoc());
+        foreach ($columns as $column) {
+            echo "<th>" . ucfirst($column) . "</th>";
         }
+        echo "</tr>";
+
+        // Re-run the query to fetch data after extracting headers
+        $result = $conn->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>";
+            foreach ($row as $val) {
+                echo "<td>$val</td>";
+            }
+            echo "</tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "No results found.";
     }
-    ?>
+}
+?>
 </body>
 </html>
